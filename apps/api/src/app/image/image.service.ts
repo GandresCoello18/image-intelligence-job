@@ -43,6 +43,21 @@ export class ImageService {
     };
   }
 
+  async deleteById(id: string) {
+    this.logger.log('ImageService - find one image');
+    const image = await this.imageModel.findById(id).lean();
+
+    if (!image) return null;
+
+    await this.imageModel.deleteOne({ _id: id });
+    await this.storage.delete(image.filename);
+
+    return {
+      success: true,
+      message: 'Image Remove'
+    };
+  }
+
   async processImage(filename: string, buffer: Buffer) {
     this.logger.log('ImageService - Uploading image');
     await this.storage.upload(filename, buffer)

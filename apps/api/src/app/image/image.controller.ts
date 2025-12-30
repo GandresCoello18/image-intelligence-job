@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Controller, Post, Get, Param, UploadedFile, UseInterceptors, Logger } from '@nestjs/common';
+import { Controller, Post, Get, Param, Delete, UploadedFile, UseInterceptors, Logger } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageService } from './image.service';
 
@@ -30,5 +30,11 @@ export class ImageController {
     const filename = `${Date.now()}-${file.originalname}`;
     await this.imageService.processImage(filename, file.buffer);
     return { status: 'queued', filename };
+  }
+
+  @Delete(':id')
+  async deleteOne(@Param('id') id: string) {
+    this.logger.log('Delete - id - image');
+    return this.imageService.deleteById(id);
   }
 }

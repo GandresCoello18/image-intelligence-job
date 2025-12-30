@@ -4,6 +4,7 @@ import { Injectable } from "@nestjs/common";
 export interface ImageStorage {
     getPresignedUrl(filename: string): Promise<string>;
     upload(filename: string, buffer: Buffer): Promise<void>;
+    delete(filename: string): Promise<void>;
 }
 
 @Injectable()
@@ -21,6 +22,13 @@ export class MinioImageStorageService implements ImageStorage {
       IMAGE_BUCKET,
       filename,
       buffer,
+    );
+  }
+
+  async delete(filename: string): Promise<void> {
+    await minioClient.removeObject(
+      IMAGE_BUCKET,
+      filename,
     );
   }
 }
