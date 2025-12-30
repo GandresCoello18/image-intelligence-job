@@ -64,6 +64,8 @@ La aplicación está construida como un **monorepo con Nx**, lo que permite comp
 
    * Persistencia de resultados de análisis
    * Esquema flexible (documental)
+  
+<img width="524" height="1036" alt="ChatGPT Image Dec 29, 2025, 07_32_59 PM" src="https://github.com/user-attachments/assets/19212139-50df-46af-b7d1-121e09e3ba3c" />
 
 ---
 
@@ -112,6 +114,12 @@ Este flujo desacopla completamente la recepción de imágenes del procesamiento 
 ### Infraestructura
 
 * **Docker / Docker Compose**
+
+API REST / NEST
+<img width="1061" height="491" alt="Captura de pantalla 2025-12-29 192626" src="https://github.com/user-attachments/assets/32bf8aff-b882-44d5-acd1-d98aa7ec3325" />
+
+JOBS WORKER / NEST
+<img width="1073" height="488" alt="Captura de pantalla 2025-12-29 192601" src="https://github.com/user-attachments/assets/22f70856-1ac9-408e-a018-307d7e2dacf3" />
 
 ---
 
@@ -178,12 +186,12 @@ Este diseño permite:
 
 ### API
 
-| Método | Endpoint         | Descripción                 |
-| ------ | ---------------- | --------------------------- |
-| POST   | /images/upload   | Sube imagen y crea job      |
-| GET    | /images          | Lista imágenes analizadas   |
-| GET    | /images/:id      | Detalle de análisis         |
-| GET    | /images/:id/file | Imagen original desde MinIO |
+| Método    | Endpoint         | Descripción                                               |
+| --------- | ---------------- | --------------------------------------------------------- |
+| POST      | /images/upload   | Sube imagen y crea job                                    |
+| GET       | /images          | Lista imágenes analizadas + Imagen original desde MinIO   |
+| GET       | /images/:id      | Detalle de análisis + Imagen original desde MinIO         |
+| DELETE    | /images/:id      | Eliminar registro + Imagen original desde MinIO           |
 
 ---
 
@@ -239,3 +247,25 @@ Image Intelligence Platform demuestra:
 * diseño orientado a escalabilidad
 
 Es una base sólida para sistemas reales de análisis de imágenes y aplicaciones con IA.
+
+## Autores ✒️
+
+- **Andrés Coello Goyes** - _SOFTWARE ENGINEER_ - [Andres Coello](https://linktr.ee/gandrescoello)
+
+#### 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://andres-coello-goyes.vercel.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andrescoellogoyes/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/acoellogoyes)
+
+## Expresiones de Gratitud 🎁
+
+- Pasate por mi perfil para ver algun otro proyecto 📢
+- Desarrollemos alguna app juntos, puedes escribirme en mis redes.
+- Muchas gracias por pasarte por este proyecto 🤓.
+
+---
+
+⌨️ con ❤️ por [Andres Coello Goyes](https://linktr.ee/gandrescoello) 😊
+
+<img width="400" height="400" alt="1764558900283" src="https://github.com/user-attachments/assets/cde88968-7856-49ec-bdb1-53a82bf9caa3" />
+
