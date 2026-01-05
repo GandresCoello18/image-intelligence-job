@@ -1,0 +1,27 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title || appName
+    link(rel="stylesheet", href="/public/css/style.css")
+  body
+    header.header
+      .container
+        h1.logo= appName
+        nav.nav
+          a.nav-link(href="/") Imágenes
+          a.nav-link(href="/upload") Subir Imagen
+    main.main
+      .container
+        if typeof error !== 'undefined' && error
+          .alert.alert-error= error
+        if typeof deleted !== 'undefined' && deleted
+          .alert.alert-success Imagen eliminada correctamente
+        if typeof uploaded !== 'undefined' && uploaded
+          .alert.alert-success Imagen subida correctamente: #{uploaded}
+        block content
+    footer.footer
+      .container
+        p &copy; 2025 Image Intelligence. Todos los derechos reservados.
+

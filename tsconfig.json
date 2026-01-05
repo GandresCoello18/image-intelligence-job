@@ -25,7 +25,7 @@
       "path": "./packages/storage"
     },
     {
-      "path": "./packages/image"
+      "path": "./apps/web"
     }
   ]
 }

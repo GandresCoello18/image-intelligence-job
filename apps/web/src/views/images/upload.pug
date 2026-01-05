@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .page-header
+    h2 Subir Nueva Imagen
+
+  .upload-form-container
+    form.upload-form(method="POST", action="/upload", enctype="multipart/form-data")
+      .form-group
+        label.form-label(for="file") Seleccionar archivo de imagen
+        input.form-input(
+          type="file",
+          id="file",
+          name="file",
+          accept="image/*",
+          required
+        )
+        small.form-help Formatos soportados: JPG, PNG, GIF, WebP, etc. (máx. 10MB)
+      
+      .form-actions
+        button.btn.btn-primary(type="submit") Subir Imagen
+        a.btn.btn-secondary(href="/") Cancelar
+

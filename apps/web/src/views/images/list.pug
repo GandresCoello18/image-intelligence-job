@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  .page-header
+    h2 Imágenes Procesadas
+    a.btn.btn-primary(href="/upload") + Subir Nueva Imagen
+
+  if images && images.length > 0
+    .images-grid
+      each image in images
+        .image-card
+          .image-preview
+            if image.imageUrl
+              img(src=image.imageUrl, alt=image.filename, loading="lazy")
+            else
+              .image-placeholder No preview available
+          .image-info
+            h3.image-title= image.filename
+            .image-meta
+              if image.metadata
+                .meta-item
+                  span.label Dimensiones:
+                  span.value #{image.metadata.width || 'N/A'} × #{image.metadata.height || 'N/A'}
+                .meta-item
+                  span.label Formato:
+                  span.value= image.metadata.format || 'N/A'
+                .meta-item
+                  span.label Tamaño:
+                  span.value= image.metadata.size ? `${(image.metadata.size / 1024).toFixed(2)} KB` : 'N/A'
+              .meta-item
+                span.label Brillo:
+                span.value.brightness(class=image.brightness)= image.brightness
+              if image.palette && image.palette.length > 0
+                .meta-item
+                  span.label Paleta:
+                  .palette
+                    each color in image.palette
+                      .color-swatch(style=`background-color: rgb(${color.r}, ${color.g}, ${color.b})`, title=`RGB(${color.r}, ${color.g}, ${color.b})`)
+            .image-actions
+              form.delete-form(method="POST", action=`/delete/${image._id}`)
+                button.btn.btn-danger(type="submit", onclick="return confirm('¿Estás seguro de eliminar esta imagen?')") Eliminar
+              if image.imageUrl
+                a.btn.btn-secondary(href=image.imageUrl, target="_blank") Ver Original
+  else
+    .empty-state
+      .empty-icon 📷
+      h3 No hay imágenes procesadas
+      p Sube tu primera imagen para comenzar
+      a.btn.btn-primary(href="/upload") Subir Imagen
+
