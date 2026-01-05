@@ -31,8 +31,7 @@
       "exclude": [
         "packages/shared/*",
         "packages/queue/*",
-        "packages/storage/*",
-        "packages/image/*"
+        "packages/storage/*"
       ]
     },
     {
@@ -71,8 +70,7 @@
       "include": [
         "packages/shared/*",
         "packages/queue/*",
-        "packages/storage/*",
-        "packages/image/*"
+        "packages/storage/*"
       ],
       "options": {
         "typecheck": {

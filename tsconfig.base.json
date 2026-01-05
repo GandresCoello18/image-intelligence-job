@@ -4,8 +4,7 @@
     "paths": {
       "@image-intelligence-v2/shared": ["packages/shared/src/index.ts"],
       "@image-intelligence-v2/queue": ["packages/queue/src/index.ts"],
-      "@image-intelligence-v2/storage": ["packages/storage/src/index.ts"],
-      "@image-intelligence-v2/image": ["packages/image/src/index.ts"]
+      "@image-intelligence-v2/storage": ["packages/storage/src/index.ts"]
     },
     "composite": true,
     "declarationMap": true,
