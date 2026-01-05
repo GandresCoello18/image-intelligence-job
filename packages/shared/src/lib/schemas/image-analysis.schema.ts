@@ -7,7 +7,7 @@ export type ImageAnalysisDocument =
 
 @Schema({
   timestamps: true,
-  collection: 'imageanalyses'
+  collection: 'imageanalyses',
 })
 export class ImageAnalysisSchemaClass {
   @Prop({ required: true })
@@ -30,3 +30,4 @@ export class ImageAnalysisSchemaClass {
 }
 
 export const ImageAnalysisSchema = SchemaFactory.createForClass(ImageAnalysisSchemaClass);
+

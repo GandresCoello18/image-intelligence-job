@@ -1,10 +1,10 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { imageQueue } from '@image-intelligence-v2/queue';
+import { QueueService } from '@image-intelligence-v2/queue';
 import { IMAGE_BUCKET } from '@image-intelligence-v2/storage';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ImageAnalysisSchemaClass } from './infrastructure/persistence/image-analysis.schema';
-import type { ImageStorage } from './infrastructure/storage/image-storage.service';
+import { ImageAnalysisSchemaClass } from '@image-intelligence-v2/shared';
+import type { StorageService } from '@image-intelligence-v2/storage';
 
 @Injectable()
 export class ImageService {
@@ -12,7 +12,8 @@ export class ImageService {
     @InjectModel(ImageAnalysisSchemaClass.name)
     private readonly imageModel: Model<ImageAnalysisSchemaClass>,
     @Inject('ImageStorage')
-    private readonly storage: ImageStorage,
+    private readonly storage: StorageService,
+    private readonly queueService: QueueService,
     private readonly logger: Logger,
   ) {}
 
@@ -60,10 +61,10 @@ export class ImageService {
 
   async processImage(filename: string, buffer: Buffer) {
     this.logger.log('ImageService - Uploading image');
-    await this.storage.upload(filename, buffer)
+    await this.storage.upload(filename, buffer);
 
     this.logger.log('ImageService - Processing Queue Image');
-    await imageQueue.add('image-processing', {
+    await this.queueService.addImageProcessingJob({
       bucket: IMAGE_BUCKET,
       filename,
     });

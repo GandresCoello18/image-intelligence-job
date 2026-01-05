@@ -4,8 +4,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Inject, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { ImageAnalyzerService } from '../services/image.analyzer';
-import { ImageAnalysisSchemaClass } from '../schemas/image-analysis.schema';
-import type { ImageStorage } from '../infrastructure/storage/image-storage.service';
+import { ImageAnalysisSchemaClass } from '@image-intelligence-v2/shared';
+import type { StorageService } from '@image-intelligence-v2/storage';
+import { ImageJobDto } from '@image-intelligence-v2/shared';
 
 @Processor('image-processing')
 export class ImageProcessor extends WorkerHost {
@@ -16,12 +17,12 @@ export class ImageProcessor extends WorkerHost {
     @InjectModel(ImageAnalysisSchemaClass.name)
     private readonly imageModel: Model<ImageAnalysisSchemaClass>,
     @Inject('ImageStorage')
-    private readonly storage: ImageStorage,
+    private readonly storage: StorageService,
   ) {
     super();
   }
 
-  async process(job: Job<{ bucket: string; filename: string }>) {
+  async process(job: Job<ImageJobDto>) {
     this.logger.log(
       `Processing job ${job.id} for file ${job.data.filename}`,
     );

@@ -1,0 +1,3 @@
+export const MINIO_CLIENT_TOKEN = Symbol('MINIO_CLIENT');
+export const STORAGE_SERVICE_TOKEN = Symbol('STORAGE_SERVICE');
+

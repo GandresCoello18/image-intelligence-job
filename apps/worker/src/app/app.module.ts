@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { BullModule } from '@nestjs/bullmq';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ImageModule } from './image/image.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { QueueModule } from '@image-intelligence-v2/queue';
+import { StorageModule } from '@image-intelligence-v2/storage';
 
 @Module({
   imports: [
@@ -15,15 +16,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
-    BullModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        connection: {
-          host: config.get<string>('REDIS_HOST'),
-          port: config.get<number>('REDIS_PORT'),
-        },
-      }),
-    }),
+    QueueModule,
+    StorageModule,
     ImageModule,
   ],
 })

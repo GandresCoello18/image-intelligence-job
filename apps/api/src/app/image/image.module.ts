@@ -1,10 +1,9 @@
 import { Logger, Module } from '@nestjs/common';
 import { ImageController } from './image.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ImageAnalysisSchemaClass, ImageAnalysisSchema } from './infrastructure/persistence/image-analysis.schema';
+import { ImageAnalysisSchemaClass, ImageAnalysisSchema } from '@image-intelligence-v2/shared';
 import { ImageService } from './image.service';
-import { MinioImageStorageService } from './infrastructure/storage/image-storage.service';
-import { MinioClientProvider } from './infrastructure/storage/minio.provider';
+import { MinioStorageService, STORAGE_SERVICE_TOKEN } from '@image-intelligence-v2/storage';
 
 @Module({
     imports: [
@@ -13,10 +12,12 @@ import { MinioClientProvider } from './infrastructure/storage/minio.provider';
         ]),
     ],
     controllers: [ImageController],
-    providers: [ImageService, MinioClientProvider, Logger,
+    providers: [
+        ImageService,
+        Logger,
         {
             provide: 'ImageStorage',
-            useClass: MinioImageStorageService,
+            useExisting: MinioStorageService,
         },
     ],
 })

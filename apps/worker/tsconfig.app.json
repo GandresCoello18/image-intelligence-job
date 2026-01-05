@@ -13,7 +13,13 @@
   "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"],
   "references": [
     {
+      "path": "../../packages/shared/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/storage/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/queue/tsconfig.lib.json"
     }
   ]
 }
